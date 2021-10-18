@@ -19,9 +19,9 @@ public class TP1_manipNombresInt_BOCAHUT_FEVRIER {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       System.out.println("Saisir un entier");
+       System.out.println("Saisir un entier"); // message destiné à l'utilisateur
        int x;
-       Scanner sc = new Scanner(System.in);
+       Scanner sc = new Scanner(System.in); // méthode pour que l'utilisateur saisisse un nombre
        x = sc.nextInt();
        System.out.println("Saisir un entier");
        int y;
@@ -30,7 +30,7 @@ public class TP1_manipNombresInt_BOCAHUT_FEVRIER {
        System.out.println(x);
        System.out.println(y);
        
-       System.out.println("La somme de ces entiers est : " + (x+y));
+       System.out.println("La somme de ces entiers est : " + (x+y)); // opérations mathématiques sur les entiers précédemment saisis
        System.out.println("La différence de ces entiers est : " + (x-y));
        System.out.println("Le produit de ces entiers est : " + x*y);
        

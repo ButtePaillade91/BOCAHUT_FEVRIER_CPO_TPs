@@ -53,8 +53,8 @@ public class TP1_convertisseur_BOCAHUT_FEVRIER {
            choix = scanaire.nextInt();
        }
        double résultat=0;
-       String te="";
-       String ts="";
+       String te=""; // température d'entrée
+       String ts=""; // température de sortie
        if (choix==1) {
            résultat = CelciusVersKelvin(température);
            te = "Celcius";
@@ -89,11 +89,11 @@ public class TP1_convertisseur_BOCAHUT_FEVRIER {
     }
     
     
-    public static double CelciusVersKelvin (double tCelcius) {
-        double tKelvin  = 273.15+tCelcius;
+    public static double CelciusVersKelvin (double tCelcius) { // fonction visant à converir de Celcius en Kelvin
+        double tKelvin  = 273.15+tCelcius; // conversion selon le système international
         return(tKelvin);
     }
-    public static double KelvinVersCelcius (double tKelvin) {
+    public static double KelvinVersCelcius (double tKelvin) { 
         double tCelcius  = tKelvin-273.15;
         return(tCelcius);
     }    
