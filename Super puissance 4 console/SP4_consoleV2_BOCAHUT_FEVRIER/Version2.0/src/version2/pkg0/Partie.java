@@ -78,7 +78,7 @@ public class Partie {
             joueurPrécédent = ListeJoueurs[0];
         }
         grillejeu.afficherGrilleSurConsole();
-        while(grillejeu.etreGagnantePourJoueur(joueurPrécédent) == false && grillejeu.etreRemplie() == false) {
+        while(grillejeu.etreGagnantePourJoueur(joueurPrécédent) == false && grillejeu.etreRemplie() == false && joueurPrécédent.nombreJetonsRestants!=0) {
             
             System.out.println(joueurCourant.nom + ", choisissez une colonne");
             Scanner sc = new Scanner(System.in);
@@ -96,6 +96,9 @@ public class Partie {
                 grillejeu.CellulesJeu[i][colonnechoisie].activerTrouNoir();
                 System.out.println("Vous tombez dans un trou noir!");
             }
+            joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants-1]=null;
+            joueurCourant.nombreJetonsRestants--;
+            System.out.println(joueurCourant.nom + " il vous reste " +joueurCourant.nombreJetonsRestants);
             if (joueurCourant==ListeJoueurs[0]) {
                 joueurCourant = ListeJoueurs[1];
                 joueurPrécédent=ListeJoueurs[0];
@@ -108,6 +111,9 @@ public class Partie {
         }
         if (grillejeu.etreGagnantePourJoueur(joueurPrécédent) == true) {
             System.out.println(joueurPrécédent.nom + " gagne la partie!");
+        }
+        else if(joueurPrécédent.nombreJetonsRestants==0) {
+            System.out.println("Partie terminée, " + joueurPrécédent.nom + " n'a plus de jetons! Il faut rejouer pour vous départager!");
         }
         else {
             System.out.println("Partie terminée, la grille est pleine!");
