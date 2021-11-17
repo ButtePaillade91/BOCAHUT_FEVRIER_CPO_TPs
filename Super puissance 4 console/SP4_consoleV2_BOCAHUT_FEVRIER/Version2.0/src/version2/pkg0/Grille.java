@@ -23,7 +23,7 @@ public class Grille {
     }
     public boolean ajouterJetonDansColonne(Jeton jetonaajouter, int nbcolonne) {
         if (CellulesJeu [5][nbcolonne].jetonCourant!=null) {
-            System.out.println("Impossible car la colonne est déjà pleine (colonne" + nbcolonne + ")");    
+            System.out.println("Impossible car la colonne est déjà pleine (colonne " + nbcolonne + ")");    
             return(false);
         }
         else{
