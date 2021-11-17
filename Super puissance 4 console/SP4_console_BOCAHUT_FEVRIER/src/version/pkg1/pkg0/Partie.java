@@ -79,6 +79,8 @@ public class Partie {
             }
             
             grillejeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants-1], colonnechoisie);
+            joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants-1]=null;
+            joueurCourant.nombreJetonsRestants--;
             if (joueurCourant==ListeJoueurs[0]) {
                 joueurCourant = ListeJoueurs[1];
                 joueurPrécédent=ListeJoueurs[0];
