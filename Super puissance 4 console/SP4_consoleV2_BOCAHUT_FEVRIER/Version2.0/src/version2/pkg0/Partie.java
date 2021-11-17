@@ -98,7 +98,7 @@ public class Partie {
             }
             joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants-1]=null;
             joueurCourant.nombreJetonsRestants--;
-            System.out.println(joueurCourant.nom + " il vous reste " +joueurCourant.nombreJetonsRestants);
+            System.out.println(joueurCourant.nom + " il vous reste " +joueurCourant.nombreJetonsRestants + " jetons restants!");
             if (joueurCourant==ListeJoueurs[0]) {
                 joueurCourant = ListeJoueurs[1];
                 joueurPrécédent=ListeJoueurs[0];
