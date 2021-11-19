@@ -59,6 +59,7 @@ public class Partie {
         }
     }
     public void debuterPartie() {
+        boolean égalitérécup = false;
         Random generateurAleat = new Random();
         int firstplayer = generateurAleat.nextInt(2);
         Joueur joueurPrécédent;
@@ -78,7 +79,7 @@ public class Partie {
             joueurPrécédent = ListeJoueurs[0];
         }
         grillejeu.afficherGrilleSurConsole();
-        while(grillejeu.etreGagnantePourJoueur(joueurPrécédent) == false && grillejeu.etreRemplie() == false) {
+        while((grillejeu.etreGagnantePourJoueur(joueurPrécédent) == false || grillejeu.etreGagnantePourJoueur(joueurCourant)==false) && grillejeu.etreRemplie() == false) {
             System.out.println(joueurCourant.nom + " à vous de jouer!");
             System.out.println("Que voulez-vous faire ?\n1°Jouer un Jeton\n2°Récupérer un Jeton");
             Scanner sc = new Scanner(System.in);
@@ -99,7 +100,7 @@ public class Partie {
                 System.out.println("Impossible, il faut choisir entre 1 et 2!");
                 choixdejeu = sc.nextInt();
             }   
-        
+
             if(choixdejeu==1) {
                 System.out.println(joueurCourant.nom + ", choisissez une colonne");
                 sc = new Scanner(System.in);
@@ -164,6 +165,9 @@ public class Partie {
                 joueurCourant.ajouterJeton(jetonàrécupérer);
                 grillejeu.tasserGrille(colonnejeton);
                 System.out.println(joueurCourant.nom + " il vous reste " +joueurCourant.nombreJetonsRestants + " jetons restants!");
+                if(grillejeu.etreGagnantePourJoueur(joueurCourant) && grillejeu.etreGagnantePourJoueur(joueurPrécédent)) {
+                    égalitérécup = true;
+                }
                 if (joueurCourant==ListeJoueurs[0]) {
                         joueurCourant = ListeJoueurs[1];
                         joueurPrécédent=ListeJoueurs[0];
@@ -175,8 +179,14 @@ public class Partie {
                 grillejeu.afficherGrilleSurConsole();
             }
         }
-        if (grillejeu.etreGagnantePourJoueur(joueurPrécédent) == true) {
+        if(égalitérécup==true) {
+            System.out.println("Faute de jeu!" + joueurCourant.nom + " gagne la partie!");
+        }
+        else if(grillejeu.etreGagnantePourJoueur(joueurPrécédent) == true) {
             System.out.println(joueurPrécédent.nom + " gagne la partie!");
+        }
+        else if(grillejeu.etreGagnantePourJoueur(joueurCourant) == true) {
+            System.out.println(joueurCourant.nom + " gagne la partie!");
         }
         else {
             System.out.println("Partie terminée, la grille est pleine!");
