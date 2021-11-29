@@ -6,10 +6,7 @@ package version4.pkg0;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.Random;
-import java.awt.Graphics;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,7 +16,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     /**
      * Creates new form fenetreDeJeu
-     */
+     */    
     Joueur[] ListeJoueurs = new Joueur[2];
     Joueur joueurCourant;
     Grille grillejeu = new Grille();
@@ -31,6 +28,13 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     public fenetreDeJeu() {
         initComponents();
         btn_start.setEnabled(false);
+        btn_col_0.setEnabled(false);
+        btn_col_1.setEnabled(false);
+        btn_col_2.setEnabled(false);
+        btn_col_3.setEnabled(false);
+        btn_col_4.setEnabled(false);
+        btn_col_5.setEnabled(false);
+        btn_col_6.setEnabled(false);
         hedwige.setVisible(false);
         les_3_freres.setVisible(false);
         panneau_info_joueurs.setVisible(false);
@@ -102,7 +106,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
                 panneau_grille.add(cellGraph);
 
-                /*
+                
                 cellGraph.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -121,16 +125,16 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
                    @Override
                     public void mouseEntered(MouseEvent e) {
-cellGraph.celluleAssociee.trouNoir=true;
-         }
+                    cellGraph.setSize(105,105);
+                    
+                    }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
                         cellGraph.setSize(96,96);
-                        cellGraph.celluleAssociee.trouNoir=false;
                        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                });*/
+                });
             }
         }
     }
@@ -148,6 +152,7 @@ cellGraph.celluleAssociee.trouNoir=true;
         theEnd = new javax.swing.JButton();
         hedwige = new javax.swing.JButton();
         les_3_freres = new javax.swing.JButton();
+        Always = new javax.swing.JButton();
         panneau_info_partie = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -222,6 +227,14 @@ cellGraph.celluleAssociee.trouNoir=true;
         });
         getContentPane().add(les_3_freres, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 540, 290, 210));
 
+        Always.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/image.png"))); // NOI18N
+        Always.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlwaysActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Always, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 680, 350, 100));
+
         panneau_info_partie.setBackground(new java.awt.Color(0, 0, 0));
         panneau_info_partie.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panneau_info_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -233,7 +246,7 @@ cellGraph.celluleAssociee.trouNoir=true;
 
         jLabel7.setFont(new java.awt.Font("Harry P", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("joueur courant :");
+        jLabel7.setText("joueur actif :");
         panneau_info_partie.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 140, 30));
 
         lbl_jcourant.setFont(new java.awt.Font("Harry P", 0, 24)); // NOI18N
@@ -531,7 +544,7 @@ cellGraph.celluleAssociee.trouNoir=true;
         panneau_fond.setLayout(panneau_fondLayout);
         panneau_fondLayout.setHorizontalGroup(
             panneau_fondLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneau_fondLayout.createSequentialGroup()
+            .addGroup(panneau_fondLayout.createSequentialGroup()
                 .addContainerGap(766, Short.MAX_VALUE)
                 .addComponent(panneau_info_joueurs, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(744, 744, 744))
@@ -631,6 +644,13 @@ cellGraph.celluleAssociee.trouNoir=true;
         les_3_freres.setVisible(true);
         initialiserPartie();
         panneau_grille.repaint();
+        btn_col_0.setEnabled(true);
+        btn_col_1.setEnabled(true);
+        btn_col_2.setEnabled(true);
+        btn_col_3.setEnabled(true);
+        btn_col_4.setEnabled(true);
+        btn_col_5.setEnabled(true);
+        btn_col_6.setEnabled(true);
         //btn_start.setEnabled(false);
         //btn_gryffondor.setVisible(false);
         //btn_poufsouffle.setVisible(false);
@@ -718,6 +738,10 @@ cellGraph.celluleAssociee.trouNoir=true;
         // TODO add your handling code here:
     }//GEN-LAST:event_les_3_freresActionPerformed
 
+    private void AlwaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlwaysActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AlwaysActionPerformed
+
     public boolean jouerDansColonne(int indice_colonne) {
         int i = 0;
         while (i <= 5 && grillejeu.CellulesJeu[i][indice_colonne].jetonCourant != null) {
@@ -793,6 +817,7 @@ cellGraph.celluleAssociee.trouNoir=true;
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new fenetreDeJeu().setVisible(true);
@@ -927,6 +952,7 @@ cellGraph.celluleAssociee.trouNoir=true;
             panneau_info_joueurs.setVisible(false);
             hedwige.setVisible(false);
             les_3_freres.setVisible(false);
+            Always.setVisible(false);
             
             if (joueurCourant==ListeJoueurs[0]) {
                 texte_fin.setText(joueurCourant.nom + " gagne la partie !");
@@ -946,6 +972,7 @@ cellGraph.celluleAssociee.trouNoir=true;
             panneau_info_joueurs.setVisible(false);
             hedwige.setVisible(false);
             les_3_freres.setVisible(false);
+            Always.setVisible(false);
             
             if (joueurCourant==ListeJoueurs[1]) {
                 texte_fin.setText(joueurCourant.nom + " gagne la partie !");
@@ -967,6 +994,7 @@ cellGraph.celluleAssociee.trouNoir=true;
                 panneau_info_joueurs.setVisible(false);
                 hedwige.setVisible(false);
                 les_3_freres.setVisible(false);
+                Always.setVisible(false);
                 
                 texte_fin.setText("Victoire de " + ListeJoueurs[1].nom + " par faute de jeu de " + ListeJoueurs[0].nom);
                 texte_fin.setVisible(true);
@@ -980,6 +1008,7 @@ cellGraph.celluleAssociee.trouNoir=true;
                 panneau_info_joueurs.setVisible(false);
                 hedwige.setVisible(false);
                 les_3_freres.setVisible(false);
+                Always.setVisible(false);
                 
                 texte_fin.setText("Victoire de " + ListeJoueurs[0].nom + " par faute de jeu de " + ListeJoueurs[1].nom);
                 texte_fin.setVisible(true);
@@ -989,6 +1018,7 @@ cellGraph.celluleAssociee.trouNoir=true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Always;
     private javax.swing.JButton btn_col_0;
     private javax.swing.JButton btn_col_1;
     private javax.swing.JButton btn_col_2;
