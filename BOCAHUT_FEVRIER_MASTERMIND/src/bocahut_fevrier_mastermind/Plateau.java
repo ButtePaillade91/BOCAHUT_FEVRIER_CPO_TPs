@@ -15,7 +15,6 @@ import java.util.Random;
 public class Plateau {
     Cellule [][] CellulesPlateau = new Cellule[12][4];
     String Combinaison[] = new String [4];
-    String CorrectTab[] = new String [4];
     
     
     
@@ -32,11 +31,11 @@ public class Plateau {
         tabCouleurs[0] = "rouge";
         tabCouleurs[1] = "jaune";
         tabCouleurs[2] = "bleu";
-        tabCouleurs[3] = "orange";
+        tabCouleurs[3] = "noir";
         tabCouleurs[4] = "vert";
         tabCouleurs[5] = "blanc";
         tabCouleurs[6] = "violet";
-        tabCouleurs[7] = "rose";
+        tabCouleurs[7] = "cyan";
         for (int i=0; i<4 ; i++) {
             Random generateurAleat = new Random();
             int codecouleurs = generateurAleat.nextInt(7);
@@ -63,7 +62,7 @@ public class Plateau {
     public static final String ANSI_WHITE = "\u001B[37m";
     
     public void afficherPlateauSurConsole() {
-        //rouge, jaune, bleu, orange, vert, blanc, violet, rose
+        //rouge, jaune, bleu, noir, vert, blanc, violet, cyan
         for (int i=11 ; i>-1 ; i--) {
             for (int j=0 ; j<4 ; j++) {
                 if(CellulesPlateau[i][j].pionCourant!=null) {
@@ -77,7 +76,7 @@ public class Plateau {
                     else if ("bleu".equals(c)) {
                         System.out.print(ANSI_BLUE + " ● " + ANSI_RESET);
                     }
-                    else if ("orange".equals(c)) {
+                    else if ("noir".equals(c)) {
                         System.out.print(ANSI_BLACK + " ● " + ANSI_RESET);
                     }  
                     else if ("vert".equals(c)) {
@@ -89,7 +88,7 @@ public class Plateau {
                     else if ("violet".equals(c)) {
                         System.out.print(ANSI_PURPLE + " ● " + ANSI_RESET);
                     }  
-                    else if ("rose".equals(c)) {
+                    else if ("cyan".equals(c)) {
                         System.out.print(ANSI_CYAN + " ● " + ANSI_RESET);
                     }  
                 }
@@ -120,46 +119,109 @@ public class Plateau {
     }
     
     public void Correction(int ligne) {
-        System.out.println(ligne);
-        System.out.println(CellulesPlateau[ligne][0].pionCourant.couleur);
-        System.out.println(Combinaison[0]);
+        int compteurbons=0;
+        int compteurmauvaiseplace=0;
+        int incorrect=0;
+        int combi0=0;
+        int combi1=0;
+        int combi2=0;
+        int combi3=0;
         if (CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[0])) {
-            CorrectTab[0] = "✔";
-            System.out.print(CorrectTab[0]);
+            combi0++;
+            compteurbons++;
         }
-        else if (CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[1])) {
-            CorrectTab[1] = "✔";
-            System.out.print(CorrectTab[1]);
+        if (CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[1])) {
+            combi1++;
+            compteurbons++;
         }
-        else if (CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[2])) {
-            CorrectTab[2] = "✔";
-            System.out.print(CorrectTab[2]);
+        if (CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[2])) {
+            combi2++;
+            compteurbons++;
         }
-        else if (CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[3])) {
-            CorrectTab[3] = "✔";
-            System.out.print(CorrectTab[3]);
+        if (CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[3])) {
+            combi3++;
+            compteurbons++;
         }
-        else if (CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[1]) || CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[2]) || CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[3])) {
-            CorrectTab[0] = "~";
-            System.out.print(CorrectTab[0]);
-        }
-        else if (CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[0]) || CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[2]) || CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[3])) {
-            CorrectTab[0] = "~";
-            System.out.print(CorrectTab[1]);
-        }
-        else if (CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[0]) || CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[1]) || CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[3])) {
-            CorrectTab[0] = "~";
-            System.out.print(CorrectTab[2]);
-        }
-        else if (CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[0]) || CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[1]) || CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[2])) {
-            CorrectTab[0] = "~";
-            System.out.print(CorrectTab[3]);
-        }
-        else {
-            for (int i=0 ; i<4 ; i++) {
-                CorrectTab[i] = "✘";
-                System.out.print(CorrectTab[i]);
+        
+        if(CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[1])) {
+            if(combi1==0) {
+                combi1++;
+                compteurmauvaiseplace++;
             }
         }
+        else if(CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[2])) {
+            if(combi2==0) {
+                combi2++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][0].pionCourant.couleur.equals(Combinaison[3])) {
+            if(combi3==0) {
+                combi3++;
+                compteurmauvaiseplace++;
+            }
+        }
+
+        if(CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[0])) {
+            if(combi0==0) {
+                combi0++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[2])) {
+            if(combi2==0) {
+                combi2++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][1].pionCourant.couleur.equals(Combinaison[3])) {
+            if(combi3==0) {
+                combi3++;
+                compteurmauvaiseplace++;
+            }
+        }
+        
+        if(CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[0])) {
+            if(combi0==0) {
+                combi0++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[1])) {
+            if(combi1==0) {
+                combi1++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][2].pionCourant.couleur.equals(Combinaison[3])) {
+            if(combi3==0) {
+                combi3++;
+                compteurmauvaiseplace++;
+            }
+        }
+        
+        if(CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[0])) {
+            if(combi0==0) {
+                combi0++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[1])) {
+            if(combi1==0) {
+                combi1++;
+                compteurmauvaiseplace++;
+            }
+        }
+        else if(CellulesPlateau[ligne][3].pionCourant.couleur.equals(Combinaison[2])) {
+            if(combi2==0) {
+                combi2++;
+                compteurmauvaiseplace++;
+            }
+        }
+        
+        
+        
+        incorrect=4-(compteurbons+compteurmauvaiseplace);
+        System.out.println("Il y a " + compteurbons +" pion(s) juste(s), " + compteurmauvaiseplace + " pion(s) mal(s) placé(s) et " + incorrect + " mauvais pion(s)");
     }
 }

@@ -18,37 +18,38 @@ public class Partie {
     String Combinaison[] = new String [4];
     
     public void initialiserPartie() {
-        //rouge, jaune, bleu, orange, vert, blanc, violet, rose
+        //rouge, jaune, bleu, noir, vert, blanc, violet, cyan
         plateaujeu.viderPlateau();
         
         
         plateaujeu.Combinaison();
+        //System.out.println("Solution:");
         for(int i=0;i<4;i++) {
             Combinaison[i]=plateaujeu.Combinaison[i];
-            System.out.println(Combinaison[i]);
+            //System.out.println(Combinaison[i]);
         }
         plateaujeu.afficherPlateauSurConsole();  
     }
     
     public void debuterPartie() {
         int lignedejeu=0;
-        while(plateaujeu.EtreGagnante(lignedejeu-1) == false) {
+        while(plateaujeu.EtreGagnante(lignedejeu-1) == false && lignedejeu<12) {
             int couleurjouées=0;
             while(couleurjouées!=5) {
-                System.out.println("Choisissez une colonne");
+                System.out.println("Choisissez une colonne de 0 à 3");
                 Scanner sc1 = new Scanner(System.in);
                 int colonnechoisie = sc1.nextInt();
                 while(colonnechoisie!=0 && colonnechoisie!=1 && colonnechoisie!=2 && colonnechoisie!=3) {
-                    System.out.println("Incorrect \nChoisissez une colonne");
+                    System.out.println("Incorrect \nChoisissez une colonne de 0 à 3");
                     sc1 = new Scanner(System.in);
                     colonnechoisie = sc1.nextInt();
                 }
 
-                System.out.println("Choississez une couleur \nChoix possibles : rouge, jaune, bleu, orange, vert, blanc, violet, rose");
+                System.out.println("Choississez une couleur \nChoix possibles : rouge, jaune, bleu, noir, vert, blanc, violet, cyan");
                 Scanner sc2 = new Scanner(System.in);
                 String couleurchoisie = sc2.nextLine();
-                while(!"rouge".equals(couleurchoisie) && !"jaune".equals(couleurchoisie) && !"bleu".equals(couleurchoisie) && !"orange".equals(couleurchoisie) && !"vert".equals(couleurchoisie) && !"blanc".equals(couleurchoisie) && !"violet".equals(couleurchoisie) && !"rose".equals(couleurchoisie)) {
-                    System.out.println("Incorrect \nChoississez une couleur \nChoix possibles : rouge, jaune, bleu, orange, vert, blanc, violet, rose");
+                while(!"rouge".equals(couleurchoisie) && !"jaune".equals(couleurchoisie) && !"bleu".equals(couleurchoisie) && !"noir".equals(couleurchoisie) && !"vert".equals(couleurchoisie) && !"blanc".equals(couleurchoisie) && !"violet".equals(couleurchoisie) && !"cyan".equals(couleurchoisie)) {
+                    System.out.println("Incorrect \nChoississez une couleur \nChoix possibles : rouge, jaune, bleu, noir, vert, blanc, violet, cyan");
                     sc2 = new Scanner(System.in);
                     couleurchoisie = sc2.nextLine();
                 }
@@ -60,6 +61,7 @@ public class Partie {
                 } 
                 plateaujeu.CellulesPlateau[lignedejeu][colonnechoisie].pionCourant.couleur=couleurchoisie;
                 if(couleurjouées==4) {
+                    plateaujeu.afficherPlateauSurConsole();
                     System.out.println("Combinaison choisie ? \nOUI ? \nNON ?");
                     Scanner sc3 = new Scanner(System.in);
                     String choix = sc3.nextLine();
@@ -76,6 +78,12 @@ public class Partie {
             }
             plateaujeu.Correction(lignedejeu);
             lignedejeu++;
+        }
+        if(lignedejeu<12) {
+            System.out.println("Vous avez gagné la partie en " + lignedejeu + " tentative(s)!");
+        }
+        else {
+            System.out.println("Vous avez perdu la partie car il ne vous reste plus aucun coup disponible!");
         }
     }
 }
